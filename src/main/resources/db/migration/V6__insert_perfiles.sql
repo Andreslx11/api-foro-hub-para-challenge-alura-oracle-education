@@ -1,0 +1,3 @@
+INSERT INTO perfiles VALUES(1, "Admin");
+INSERT INTO perfiles VALUES(2, "INSTRUCTOR");
+INSERT INTO perfiles VALUES(3, "USER");
