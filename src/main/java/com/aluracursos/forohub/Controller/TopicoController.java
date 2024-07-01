@@ -39,7 +39,7 @@ public class TopicoController {
 
     // listar topicos
 
-    @GetMapping("/topicos/listar") // luri cuando quito esto ("/listar")
+    @GetMapping("/topicos/listar")
     public ResponseEntity<Page<DatosDetallesTopico>> listarMedico(@PageableDefault(size= 10)Pageable pageable){
 
         return ResponseEntity.ok(topicoRepository.findAll(pageable).map(DatosDetallesTopico::new));
@@ -58,7 +58,8 @@ public class TopicoController {
 
     // atualizar topico
 
-    @PutMapping("/topicos/atualizar/{id}")
+//    @PutMapping("/topicos/atualizar/{id}")
+    @PutMapping("/topicos")
     @Transactional
     public ResponseEntity actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosAtualizarTopico datos){
 
@@ -72,7 +73,8 @@ public class TopicoController {
 
     // Elimanar topico de la base de datos
 
-    @DeleteMapping("/topicos/eliminar/{id}")
+//    @DeleteMapping("/topicos/eliminar/{id}")
+    @DeleteMapping("/topicos")
     @Transactional
     public ResponseEntity eliminarTopico(@PathVariable Long id ){
 
