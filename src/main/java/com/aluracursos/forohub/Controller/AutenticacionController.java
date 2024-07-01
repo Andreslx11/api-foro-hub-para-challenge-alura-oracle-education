@@ -24,35 +24,12 @@ public class AutenticacionController {
     private TokenService tokenService;
 
 
-
-    public void  hola(){
-        System.out.println("hola mundoooooooooooooo");
-    }
-
-
-/*
-    @PostMapping("/login")
-    public ResponseEntity autenticarUsuario(@RequestBody  DatosAutenticacionUsuario datosAutenticacionUsuario) {
-        Authentication authToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.email(),
-                datosAutenticacionUsuario.contrasenia());
-
-        System.out.println("authToken:  " +  authToken);
-        var usuarioAutenticado = authenticationManager.authenticate(authToken);
-
-        var JWTtoken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
-
-        return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
-    }
-*/
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datosAutenticacionUsuario) {
         Authentication authToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.email(),
                 datosAutenticacionUsuario.contrasenia());
-        System.out.println("authToken " +  authToken);
 
         var usuarioAutenticado = authenticationManager.authenticate(authToken);
-
-        System.out.println("usuarioAutenticado " + usuarioAutenticado);
 
         var JWTtoken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
         return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
@@ -60,8 +37,3 @@ public class AutenticacionController {
 
 }
 
-
-/*
-luri cuando imprimo por pantalla esto  System.out.println("authToken " +  authToken); me sale esto :
-authToken UsernamePasswordAuthenticationToken [Principal=prueba.admin@col.com, Credentials=[PROTECTED], Authenticated=false, Details=null, Granted Authorities=[]]/
- */

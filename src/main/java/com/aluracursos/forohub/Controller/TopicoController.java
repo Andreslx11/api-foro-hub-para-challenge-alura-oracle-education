@@ -19,7 +19,7 @@ public class TopicoController {
 
 
     @Autowired
-    private RegistrarTopicoService service;
+    private  TopicoService service;
     @Autowired
     private TopicoRepository topicoRepository;
 
@@ -27,60 +27,41 @@ public class TopicoController {
     @PostMapping("/topicos/registrar")
     @Transactional
     public ResponseEntity registrarTopico(@RequestBody @Valid DatosRegistrarTopico datosTopico){
-
-        System.out.println("hola mundoooooooooooooo");
-
-
-      var response = service.registrarTopico(datosTopico);
-
-      return ResponseEntity.ok(response);
+        return service.registrarTopico(datosTopico);
     }
 
 
     // listar topicos
-
     @GetMapping("/topicos/listar")
-    public ResponseEntity<Page<DatosDetallesTopico>> listarMedico(@PageableDefault(size= 10)Pageable pageable){
-
-        return ResponseEntity.ok(topicoRepository.findAll(pageable).map(DatosDetallesTopico::new));
+    public ResponseEntity<Page<DatosDetallesTopico>> listarMedico(@PageableDefault(size= 10) Pageable pageable){
+        return service.listarTopicos(pageable);
 
     }
 
     // listar topico por id
     @GetMapping("/topicos/listar/{id}")
     public  ResponseEntity<DatosDetallesTopico> retornarDatosTopico(@PathVariable Long id){
-
-     var topico = topicoRepository.getReferenceById(id);
-     var datosTopico = new DatosDetallesTopico(topico);
-     return ResponseEntity.ok(datosTopico);
+        return service.retornarDatosTopico(id);
     }
 
 
     // atualizar topico
-
-//    @PutMapping("/topicos/atualizar/{id}")
-    @PutMapping("/topicos")
+    @PutMapping("/topicos/atualizar/{id}")
     @Transactional
     public ResponseEntity actualizarTopico(@PathVariable Long id, @RequestBody @Valid DatosAtualizarTopico datos){
 
         var topico = topicoRepository.getReferenceById(id);
         topico.actualizarTopico(datos);
-
         return ResponseEntity.ok(new DatosDetallesTopico(topico));
 
     }
 
 
     // Elimanar topico de la base de datos
-
-//    @DeleteMapping("/topicos/eliminar/{id}")
-    @DeleteMapping("/topicos")
+    @DeleteMapping("/topicos/eliminar/{id}")
     @Transactional
     public ResponseEntity eliminarTopico(@PathVariable Long id ){
-
-         topicoRepository.deleteById(id);
-
-        return ResponseEntity.noContent().build();
+        return service.eliminarTopico(id);
 
     }
 
@@ -96,8 +77,9 @@ public class TopicoController {
 
         System.out.println("hola mundoooooooooooooo");
 
-
-
     }
 */
+
+
+
 }

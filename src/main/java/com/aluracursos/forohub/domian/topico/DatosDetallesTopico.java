@@ -16,10 +16,7 @@ public record DatosDetallesTopico(
         LocalDateTime fechaDeCreacion
 
 
-
-
 ) {
-
 
 
         public DatosDetallesTopico(Topico topico){
