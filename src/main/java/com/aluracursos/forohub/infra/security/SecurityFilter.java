@@ -29,15 +29,12 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        System.out.println("Primer filtor pasa");
         //obtener token del encanbezado de la peticion del cliente
         String authHeader = request.getHeader("Authorization");
 
         System.out.println("segundo filtro:  " +  authHeader );
         if (authHeader != null) {
             var token = authHeader.replace("Bearer ", "");
-
-            System.out.println("este es el token " + token);
 
             var nombreEmail= tokenService.getSubject(token);
 
