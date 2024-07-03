@@ -1,15 +1,18 @@
 package com.aluracursos.forohub.domian.topico;
 
 import com.aluracursos.forohub.domian.curso.CursoRepository;
+import com.aluracursos.forohub.domian.topico.validaciones.IValidadorDeTopicos;
 import com.aluracursos.forohub.domian.usuario.UsuarioRepository;
+import com.aluracursos.forohub.infra.errores.ValidacionDeIntegridad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
+
 
 @Service
 public class TopicoService {
@@ -25,14 +28,28 @@ public class TopicoService {
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Autowired
+    List<IValidadorDeTopicos> validadores;
 
     // Registrar topico
     public ResponseEntity registrarTopico(DatosRegistrarTopico datos) {
+
+
+        if(!cursoRepository.findById(datos.idCurso()).isPresent()){
+            throw new ValidacionDeIntegridad("Este curso no fue encontrado");
+        }
+
+        if (!topicoRepository.existsById(datos.idUsuario())){
+            throw  new ValidacionDeIntegridad("El id para usuario no fue encontrado");
+        }
+        validadores.forEach(v -> v.validar(datos));
+
         //datos
         var mensaje = datos.mensaje();
         var titulo = datos.titulo();
         var curso = cursoRepository.findById(datos.idCurso()).get();
         var usuario = usuarioRepository.findById(datos.idUsuario()).get();
+
 
         var topico = new Topico(titulo, mensaje, usuario, curso);
 
