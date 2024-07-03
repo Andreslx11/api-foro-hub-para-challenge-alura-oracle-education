@@ -23,7 +23,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
 
-    // esta clase se inyecta en SecurityConfigurations
+    // esta clase se inyectar en SecurityConfigurations
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

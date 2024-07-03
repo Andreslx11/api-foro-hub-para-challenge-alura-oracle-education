@@ -8,11 +8,12 @@ import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.tags.Tag;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+@Configuration
 public class SpringDocConfiguration {
 
 
@@ -41,8 +42,6 @@ public class SpringDocConfiguration {
                                         .description("Endpoints relacionados con la autenticación"),
                                new Tag().name("Topico")
                                        .description("Endpoints relacionados con topicos")
-
-
 
                         ));
 
