@@ -2,12 +2,14 @@ package com.aluracursos.forohub.domian.respuesta;
 
 
 import com.aluracursos.forohub.domian.topico.Topico;
+import com.aluracursos.forohub.domian.topico.TopicoRepository;
 import com.aluracursos.forohub.domian.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
@@ -40,4 +42,31 @@ public class Respuesta {
       private Usuario autor;
 
       private String    solucion;
+
+
+
+
+      public Respuesta(String mensaje, Topico topico, Usuario autor, String solucion) {
+            this.mensaje = mensaje;
+            this.topico = topico;
+            this.fechaDeCreacion = LocalDateTime.now();
+            this.autor = autor;
+            this.solucion = solucion;
+      }
+
+
+      // Actualizar respuesta
+
+      public void actualizarRespuesta(DatosActualizarRespuesta datos){
+
+            if(datos.mensaje() != null){
+                  this.mensaje = datos.mensaje();
+            }
+
+            if(datos.solucion() != null){
+                  this.solucion = datos.solucion();
+            }
+      }
+
+
 }
