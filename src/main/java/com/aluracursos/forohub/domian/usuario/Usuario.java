@@ -1,11 +1,13 @@
 package com.aluracursos.forohub.domian.usuario;
 
 import com.aluracursos.forohub.domian.perfil.Perfil;
+import com.aluracursos.forohub.domian.perfil.PerfilRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,9 +40,36 @@ public class Usuario implements UserDetails {
     private Perfil perfil;
 
 
+
+
+    public Usuario( String nombre, String email, String contrasenia, Perfil perfil) {
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasenia = contrasenia;
+        this.perfil = perfil;
+    }
+
+
+    public void actualizarUsuario(DatosActualizarUsuario datos){
+
+        if(datos.nombre() != null){
+            this.nombre = datos.nombre();
+        }
+        if(datos.email() != null){
+            this.email = datos.email();
+        }
+        if(datos.contrasenia() != null){
+            this.contrasenia = datos.contrasenia();
+        }
+
+    }
+
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(perfil.getRollUsuario()));
     }
 
     @Override
