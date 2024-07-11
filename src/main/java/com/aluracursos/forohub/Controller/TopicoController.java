@@ -45,7 +45,7 @@ public class TopicoController {
     }
 
     // listar topico por id
-    @GetMapping("/topicos/listar/{id}")
+    @GetMapping("/topico/listar/{id}")
     @Operation(summary = "Obtener Topico por Id", description =" Proporciona el endpoint para obtener un topico por su id")
     public  ResponseEntity<DatosDetallesTopico> retornarDatosTopico(@PathVariable Long id){
         return service.retornarDatosTopico(id);
