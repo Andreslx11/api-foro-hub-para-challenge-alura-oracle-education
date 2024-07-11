@@ -9,7 +9,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.tags.Tag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+
 
 import java.util.List;
 
@@ -41,7 +41,13 @@ public class SpringDocConfiguration {
                                 new Tag().name("Autenticacion")
                                         .description("Endpoints relacionados con la autenticación"),
                                new Tag().name("Topico")
-                                       .description("Endpoints relacionados con topicos")
+                                       .description("Endpoints relacionados con topicos"),
+                                new Tag().name("Respuesta")
+                                        .description("Endpoints relacionados con respuesta de topicos"),
+                                new Tag().name("Usuario")
+                                        .description("Endpoints relacionados con respuesta de  usuario"),
+                                new Tag().name("Curso")
+                                        .description("Endpoints relacionados con cursos")
 
                         ));
 
